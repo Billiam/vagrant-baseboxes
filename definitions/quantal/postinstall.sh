@@ -57,8 +57,7 @@ cd chruby-0.3.4/
 sudo make install
 
 # Set default ruby
-echo 'source /usr/local/share/chruby/chruby.sh' >> ~/.bashrc
-echo 'chruby ruby-1.9.3' >> ~/.bashrc
+echo "source /usr/local/share/chruby/chruby.sh \nchruby ruby-1.9.3" | sudo tee /etc/profile.d/chruby.sh
 
 RUBYCMD="source /usr/local/share/chruby/chruby.sh && chruby ruby-1.9.3"
 
