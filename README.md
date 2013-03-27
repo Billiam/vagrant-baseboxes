@@ -11,3 +11,4 @@ Ubuntu 12.10 i-386 with:
  * puppet
  * ruby-build
  * chruby
+ * dvorak

@@ -93,6 +93,10 @@ mkdir /etc/udev/rules.d/70-persistent-net.rules
 rm -rf /dev/.udev/
 rm /lib/udev/rules.d/75-persistent-net-generator.rules
 
+#enforce dvorak layout
+sed -e 's/^XKBMODEL="SKIP"/XKBMODEL="pc104"/' -e 's/^XKBVARIANT=""/XKBVARIANT="dvorak"/' -e 's/^XKBLAYOUT=""/XKBLAYOUT="us"/' /etc/default/keyboard | sudo tee /etc/default/keyboard
+sudo dpkg-reconfigure -f noninteractive keyboard-configuration
+
 echo "Adding a 2 sec delay to the interface up, to make the dhclient happy"
 echo "pre-up sleep 2" >> /etc/network/interfaces
 exit
