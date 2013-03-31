@@ -97,6 +97,13 @@ rm /lib/udev/rules.d/75-persistent-net-generator.rules
 sed -e 's/^XKBMODEL="SKIP"/XKBMODEL="pc104"/' -e 's/^XKBVARIANT=""/XKBVARIANT="dvorak"/' -e 's/^XKBLAYOUT=""/XKBLAYOUT="us"/' /etc/default/keyboard | sudo tee /etc/default/keyboard
 sudo dpkg-reconfigure -f noninteractive keyboard-configuration
 
+#fix slow SSH login
+echo 'UseDNS no' | sudo tee -a /etc/ssh/sshd_config
+
+#comment out session optional pam_motd.so
+sed -e 's/^\(session\s\+optional\s\+pam_motd.so\)/#\1/' /etc/pam.d/login | sudo tee /etc/pam.d/login
+sed -e 's/^\(session\s\+optional\s\+pam_motd.so\)/#\1/' /etc/pam.d/sshd | sudo tee /etc/pam.d/sshd
+
 echo "Adding a 2 sec delay to the interface up, to make the dhclient happy"
 echo "pre-up sleep 2" >> /etc/network/interfaces
 exit
